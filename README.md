@@ -9,4 +9,4 @@ In this walkthrough, we will learn a few tools for summarzing categorical data u
 
 
 ### Sample Data
-(https://github.com/jamalfrnk/ContingencyTables_R/tree/master/TitanicSurvival.csv.csv)
+[TitanicSurvival.csv](https://github.com/jamalfrnk/ContingencyTables_R/tree/master/TitanicSurvival.csv.csv)
