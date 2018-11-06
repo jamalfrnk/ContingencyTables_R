@@ -12,4 +12,3 @@ In this walkthrough, we will learn a few tools for summarzing categorical data u
 
 The following sample dataset needs to be imported. This can be done directly from RStudio's "Import Dataset" button, or the "read.csv" command. 
 [TitanicSurvival.csv](https://github.com/jamalfrnk/ContingencyTables_R/tree/master/TitanicSurvival.csv.csv)
-
