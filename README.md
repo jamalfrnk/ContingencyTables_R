@@ -24,12 +24,13 @@ Input the following commands into RStudio to download the required packages for 
 The following sample dataset needs to be imported. [TitanicSurvival.csv](https://github.com/jamalfrnk/ContingencyTables_R/tree/master/TitanicSurvival.csv.csv)
 
 This can be done directly from RStudio's "Import Dataset" button, or the "read.csv" command:
-    TitanicSurvival = read.csv('TitanicSurvival.csv')
+    
+     TitanicSurvival = read.csv('TitanicSurvival.csv')
     
  
 We use the `head` function to see the first few lines of the dataset.
- head(TitanicSurvival)
-
+       
+       head(TitanicSurvival)
     ##                                 X survived    sex     age passengerClass
     ## 1   Allen, Miss. Elisabeth Walton      yes female 29.0000            1st
     ## 2  Allison, Master. Hudson Trevor      yes   male  0.9167            1st
@@ -41,7 +42,7 @@ We use the `head` function to see the first few lines of the dataset.
 We can see the name of each passenger and wheter they survived, along with their age, sex, and cabin class.
 
 
-Next, we will use the xtab() function to make some contingency tables. We can stratify by survival status and sex: 
+Next, we will use the `xtab` function to make some contingency tables. We can stratify by survival status and sex: 
    
     xtabs(~survived + sex, data=TitanicSurvival)
 
