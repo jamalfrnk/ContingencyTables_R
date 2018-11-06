@@ -16,8 +16,9 @@ This can be done directly from RStudio's "Import Dataset" button, or the "read.c
     TitanicSurvival = read.csv('TitanicSurvival.csv')
     
  
-We use the head() function to see the first few lines of the dataset.
-  head(TitanicSurvival.csv) 
+We use the `head` function to see the first few lines of the dataset.
+ head(TitanicSurvival)
+
     ##                                 X survived    sex     age passengerClass
     ## 1   Allen, Miss. Elisabeth Walton      yes female 29.0000            1st
     ## 2  Allison, Master. Hudson Trevor      yes   male  0.9167            1st
@@ -30,61 +31,61 @@ We can see the name of each passenger and wheter they survived, along with their
 
 
 Next, we will use the xtab() function to make some contingency tables. We can stratify by survival status and sex: 
-   xtabs(~survived + sex, data=TitanicSurvival.csv)
    
-   ##         sex
-   ## survived female male
-   ##      no     127  682
-   ##      yes    339  161
+    xtabs(~survived + sex, data=TitanicSurvival)
 
+    ##         sex
+    ## survived female male
+    ##      no     127  682
+    ##      yes    339  161
 
 Or by passenger class:
 
-  xtabs(~survived + passengerClass, data=TitanicSurvival.csv)
+    xtabs(~survived + passengerClass, data=TitanicSurvival)
 
-   ##         passengerClass
-   ## survived 1st 2nd 3rd
-   ##      no  123 158 528
-   ##      yes 200 119 181
-   
+    ##         passengerClass
+    ## survived 1st 2nd 3rd
+    ##      no  123 158 528
+    ##      yes 200 119 181
 
 Or by all three, to yield a multi-way table:
 
-   xtabs(~survived + passengerClass + sex, data=TitanicSurvival)
+    xtabs(~survived + passengerClass + sex, data=TitanicSurvival)
 
-   ## , , sex = female
-   ## 
-   ##         passengerClass
-   ## survived 1st 2nd 3rd
-   ##      no    5  12 110
-   ##      yes 139  94 106
-   ## 
-   ## , , sex = male
-   ## 
-   ##         passengerClass
-   ## survived 1st 2nd 3rd
-   ##      no  118 146 418
-   ##      yes  61  25  75
+    ## , , sex = female
+    ## 
+    ##         passengerClass
+    ## survived 1st 2nd 3rd
+    ##      no    5  12 110
+    ##      yes 139  94 106
+    ## 
+    ## , , sex = male
+    ## 
+    ##         passengerClass
+    ## survived 1st 2nd 3rd
+    ##      no  118 146 418
+    ##      yes  61  25  75
    
    
-  We can also turn the table counts into proportions using the prop.table command.
+  We can also turn the table counts into proportions using the `prop.table` command.
    
-   table1 = xtabs(~survived + sex, data=TitanicSurvival)
+    table1 = xtabs(~survived + sex, data=TitanicSurvival)
     prop.table(table1, margin=1)
 
-   ##         sex
-   ## survived    female      male
-   ##      no  0.1569839 0.8430161
-   ##      yes 0.6780000 0.3220000
+    ##         sex
+    ## survived    female      male
+    ##      no  0.1569839 0.8430161
+    ##      yes 0.6780000 0.3220000
 
 The first command says to store the table of raw counts in a variable called table1. The second says turn the counts into proportions, standardizing so that the rows (margin=1) sum to 1. 
 
 
 We can also standardize along the columns. We’re thinking of sex as the predictor and survival as the response, and therefore we want to see how the relative changes for men versus women:
 
- prop.table(table1, margin=2)
+    prop.table(table1, margin=2)
 
-   ##         sex
-   ## survived    female      male
-   ##      no  0.2725322 0.8090154
-   ##      yes 0.7274678 0.1909846
+    ##         sex
+    ## survived    female      male
+    ##      no  0.2725322 0.8090154
+    ##      yes 0.7274678 0.1909846
+
