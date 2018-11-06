@@ -1,6 +1,6 @@
 # ContingencyTables_R
-Malcolm Frank 
-Software Engineer, Infinitely Deep Robotics Group 2018
+# Malcolm Frank 
+# Software Engineer, Infinitely Deep Robotics Group 2018
 
 ## Project Title: Summarizing categorical data using contingency tables
 
