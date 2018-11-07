@@ -26,8 +26,84 @@ The following sample dataset needs to be imported. [TitanicSurvival.csv](https:/
 This can be done directly from RStudio's "Import Dataset" button, or the "read.csv" command:
     
      TitanicSurvival = read.csv('TitanicSurvival.csv')
-    
+     
+#### Frequencies 
+To produce contingency tables which calculate counts for each combination of categorical variables we can use R's `table` function.
+
+       # counts for sex (gender) categories
+       table(TitanicSurvival.csv$sex)
+       ##
+       ##      female    male
+       ##         466     843 
  
+ If we want to understand the number of males and females of a particular age group we can produce a cross classificatin table:
+ 
+       # cross classification counts for gender by age 
+       table(TitanicSurvival.csv$age, TitanicSurvival.csv$sex)
+       ##
+       ##                female    male
+       ##    0.166700006      1       0
+       ##    0.333299994      0       1
+       ##    0.416700006      0       1
+       ##    0.666700006      0       1
+       ##    0.75             2       1
+       ##    0.833299994      0       3
+       ##    0.916700006      1       1
+       ##    1                5       5
+       ##    2                7       5
+       ##    3                3       4
+       ##    4                5       5
+The above cross classification table is only a snippet of the whole. It conveys the total number of male and female passengers on the the Titanic between the ages of 1.6months to 4years old. The entire table would range the ages of males and females aboard the Titanic from 1.6 months to 80years old.
+
+
+We can also produce multidimensional tables based on three or more categorical variables. For this we leverage the `ftable` function to print the results more attractively. In this case we assess the count of passengers by sex, passengerClass, survived:
+
+       ## customer counts across gender by passengerClass and survived
+       table1 <- table(TitanicSurvival.csv$sex, TitanicSurvival.csv$passengerClass, TitanicSurvival.csv$survived) 
+       ftable(table1)
+                    
+                    no yes                  
+    ## female 1st    5 139
+    ##        2nd   12  94
+    ##        3rd  110 106
+    ## male   1st  118  61
+    ##        2nd  146  25
+    ##        3rd  418  75
+    
+    
+#### Proportions 
+   
+We can also produce contingency tables thast present the proportions (percentages) of each category or combination of categories. To do this we simply feed the frequency tables produced by `table` function to the `prop.table` function. The following reproduces the previous tables but calculates the proportions rather than counts:
+
+     # percentage of gender categories
+     table2 <- table(TitanicSurvival.csv$sex)
+     prop.table(table2)
+     ##
+     ##        female         male 
+     ##     0.3559969    0.6440031
+     
+     # percentage of gender of a particular age group 
+     table3 <- table(TitanicSurvival.csv$sex, TitanicSurvival.csv$age)
+     prop.table(table3)
+     ##
+     ##      
+     ##                  25           26
+     ## female 0.0057361377 0.0086042065
+     ## male   0.0267686424 0.0200764818
+     # Please note: This is only a snippet of my result contingency table. The data here represents the percentage of females : males of age 25 and 26. 
+
+     
+     # customer percentages across gender by passengerClass and survived
+     # using table1 from previous code chunk
+     ftable(round(prop.table(table1), 3))
+     #               no   yes               
+     # female 1st  0.004 0.106
+     #        2nd  0.009 0.072
+     #        3rd  0.084 0.081
+     # male   1st  0.090 0.047
+     #        2nd  0.112 0.019
+     #        3rd  0.319 0.057 
+
 We use the `head` function to see the first few lines of the dataset.
        
        head(TitanicSurvival)
