@@ -36,9 +36,9 @@ To produce contingency tables which calculate counts for each combination of cat
        ##      female    male
        ##         466     843 
  
- If we want to understand the number of males and females of a particular age group we can produce a cross classificatin table:
+ If we want to understand the number of males and females of a particular age group we can produce a cross classification table:
  
-       # cross classification counts for gender by age 
+       # cross classification counts for age by sex (gender)
        table(TitanicSurvival.csv$age, TitanicSurvival.csv$sex)
        ##
        ##                female    male
@@ -53,12 +53,12 @@ To produce contingency tables which calculate counts for each combination of cat
        ##    2                7       5
        ##    3                3       4
        ##    4                5       5
-The above cross classification table is only a snippet of the whole. It conveys the total number of male and female passengers on the the Titanic between the ages of 1.6months to 4years old. The entire table would range the ages of males and females aboard the Titanic from 1.6 months to 80years old.
+The above cross classification table is only a snippet of the whole. It conveys the total number of male or female passengers on the the Titanic of a particular age. This snippet range begins at the age of 1.6months and ends at 4years old. The entire table would range the ages of males and females aboard the Titanic from 1.6 months to 80years old.
 
 
-We can also produce multidimensional tables based on three or more categorical variables. For this we leverage the `ftable` function to print the results more attractively. In this case we assess the count of passengers by sex, passengerClass, survived:
+We can also produce multidimensional tables based on three or more categorical variables. For this we leverage the `ftable` function to print the results more attractively. In this case we assess the count of passengers by sex (gender), passengerClass, survived:
 
-       ## customer counts across gender by passengerClass and survived
+       ## customer counts across sex (gender) by passengerClass and survived
        table1 <- table(TitanicSurvival.csv$sex, TitanicSurvival.csv$passengerClass, TitanicSurvival.csv$survived) 
        ftable(table1)
                     
@@ -73,16 +73,16 @@ We can also produce multidimensional tables based on three or more categorical v
     
 #### Proportions 
    
-We can also produce contingency tables thast present the proportions (percentages) of each category or combination of categories. To do this we simply feed the frequency tables produced by `table` function to the `prop.table` function. The following reproduces the previous tables but calculates the proportions rather than counts:
+We can also produce contingency tables that present the proportions (percentages) of each category or combination of categories. To do this we simply feed the frequency tables produced by `table` function to the `prop.table` function. The following reproduces the previous tables but calculates the proportions rather than counts:
 
-     # percentage of gender categories
+     # percentage of sex (gender) categories
      table2 <- table(TitanicSurvival.csv$sex)
      prop.table(table2)
      ##
      ##        female         male 
      ##     0.3559969    0.6440031
      
-     # percentage of gender of a particular age group 
+     # percentage of sex (gender) of a particular age group 
      table3 <- table(TitanicSurvival.csv$sex, TitanicSurvival.csv$age)
      prop.table(table3)
      ##
@@ -93,7 +93,7 @@ We can also produce contingency tables thast present the proportions (percentage
      # Please note: This is only a snippet of my result contingency table. The data here represents the percentage of females : males of age 25 and 26. 
 
      
-     # customer percentages across gender by passengerClass and survived
+     # customer percentages across sex (gender) by passengerClass and survived
      # using table1 from previous code chunk
      ftable(round(prop.table(table1), 3))
      #               no   yes               
@@ -103,6 +103,71 @@ We can also produce contingency tables thast present the proportions (percentage
      # male   1st  0.090 0.047
      #        2nd  0.112 0.019
      #        3rd  0.319 0.057 
+
+
+#### Marginals
+
+Marginals show the total counts or percentages across columns or rows in a contingency table. For example, if we go back to `table3` which is cross classification counts for sex (gender) by age:
+
+     ##
+     ##      
+     ##                  25           26
+     ## female 0.0057361377 0.0086042065
+     ## male   0.0267686424 0.0200764818
+     
+We can produce the marginal frequencies with `margin.table()` and the percentages for these marginal frequencies with `prop.table()` using the `margin` argument:
+
+     # FREQUENCY MARGINALS 
+     # row marginals - totals for each age across sex (gender)
+     margin.table(table3, 1)
+     ##    female   male 
+     ##       388    658 
+     
+     # column marginals - totals for each sex (gender) across age
+     margin.table(table3, 2)
+     ## 24        24.5          25 
+     ## 47           1          34 
+     ## 26        26.5          27 
+     ## 30           1          30 
+
+
+     # PERCENTAGE MARGINALS 
+     # row marginals - row percentages across sex (gender)
+     prop.table(table3, margin = 1)
+     #                24        24.5
+     # female 0.054123711 0.000000000
+     # male   0.039513678 0.001519757
+        
+     #                25          26
+     # female 0.015463918 0.023195876
+     # male   0.042553191 0.031914894
+        
+     #              26.5          27
+     # female 0.000000000 0.025773196
+     # male   0.001519757 0.030395137
+     
+     # column marginals - colun percentages across age 
+     prop.table(table3, margin = 2)
+     #             23.5        24      24.5
+     # female 0.0000000 0.4468085 0.0000000
+     # male   1.0000000 0.5531915 1.0000000
+        
+     #              25        26      26.5
+     # female 0.1764706 0.3000000 0.0000000
+     # male   0.8235294 0.7000000 1.0000000
+        
+     #              27        28      28.5
+     # female 0.3333333 0.2812500 0.0000000
+     # male   0.6666667 0.7187500 1.0000000
+     
+     
+     
+#### Visualization
+Bar charts are most often used to visualize categorical variables. Her we can asses the count of passengers by passengerClass:
+
+     ggplot(TitanicSurvival.csv, aes(x = passengerClass)) + geom_bar() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+     
+     ![Bar Graph with Count of Titanic Passengers categorized by passengerClass](https://github.com/jamalfrnk/ContingencyTables_R/tree/master/markdown/TitanPassenger20%by20%passengerClass.png)
 
 We use the `head` function to see the first few lines of the dataset.
        
