@@ -5,7 +5,7 @@
 ## Project Title: Summarizing categorical data using contingency tables
 
 ### Overview: 
-In this walkthrough, we will learn a few tools for summarzing categorical data using contingency tables. 
+In this walkthrough, we will learn a few tools for summarzing categorical data using contingency tables. Each table in this repo was generated using R Studio. 
 
 ### Purpose:
 We want to examine the following key features associated with categorical data:
