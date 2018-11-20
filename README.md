@@ -167,7 +167,7 @@ Bar charts are most often used to visualize categorical variables. Her we can as
 
      ggplot(TitanicSurvival.csv, aes(x = passengerClass)) + geom_bar() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
      
-   ![Bar Graph with Count of Titanic Passengers categorized by passengerClass](https://github.com/jamalfrnk/ContingencyTables_R/tree/master/Titanic%Passenger%by%passengerClass)
+   ![Bar Graph with Count of Titanic Passengers categorized by passengerClass](https://github.com/jamalfrnk/ContingencyTables_R/tree/master/Rplot%-%TitanPassengers%by%passengerClass.png)
    
 We use the `head` function to see the first few lines of the dataset.
        
