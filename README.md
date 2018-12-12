@@ -2,7 +2,7 @@
 # Malcolm Frank 
 # Software Engineer, Infinitely Deep Robotics Group, 2018
 
-## Project Title: Summarizing categorical data using contingency tables
+## Project Title: Summarizing Categorical Data Using Contingency Tables
 
 ### Overview: 
 In this walkthrough, we will learn a few tools for summarzing categorical data using contingency tables. Each table in this repo was generated using R Studio. 
